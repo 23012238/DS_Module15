@@ -1,44 +1,65 @@
-## Ex 3A Tree Representation and Traversal
+# Ex 3B Binary Search Tree
 ## DATE:15/03/2025
 ## AIM:
-To write a C function to perform post order traversal of a binary tree.
+To write a C function to insert the elements in the binary search tree
 
 ## Algorithm
 1. Start
-2. Define a function display_postorder() that takes a pointer to the root node of the tree.
-3. Check if the current node (root_node) is not null.
-4. Recursively call display_postorder() for the left child of the current node.
-5. Recursively call display_postorder() for the right child of the current node.
-6. After visiting both children, print the value of the current node.
-7. End   
+2. Check if the current node is NULL; if true, create a new node with the given key.
+3. Allocate memory for the new node, set its key, and initialize its left and right children to
+NULL.
+4. If the current node is not NULL, compare the key with the current node's key.
+5. If key <= node->key, recursively insert the key into the left subtree and update the left child
+pointer.
+6. If key > node->key, recursively insert the key into the right subtree and update the right
+child pointer.
+7. Return the current node after the insertion.
+8. End
+ 
 
 ## Program:
 ```
 /*
-Program to perform post order traversal of a binary tree.
+Program to insert the elements in the binary search tree
 Developed by: S.L.NARASIMHA REDDY
-RegisterNumber:  212223040214
+RegisterNumber: 212223040214
 */
-struct node
-{
-int value;
-struct node*left_child, *right_child;
+structnode{
+int key;
+struct node*left, *right;
 };*/
-void display_postorder(struct node*root_node){
-if(root_node)
+struct node* insert(struct node* node, int key)
 {
-display_postorder(root_node->left_child);
-display_postorder(root_node->right_child);
-printf("%d\n",root_node->value);
+if(node==NULL)
+{
+struct node*node=(struct node*)malloc(sizeof(struct node));
+node->key=key;
+node->left=NULL;
+node->right=NULL;
+return node;
+}
+else
+{
+struct node* cur;
+if(key<=node->key)
+{
+cur=insert(node->left,key);
+node->left=cur;
+}
+else
+{
+cur=insert(node->right,key);
+node->right=cur;
+}
+returnnode;
 }
 }
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/05b474c4-8040-4063-8a45-ed846c6f8a85)
 
-
+![image](https://github.com/user-attachments/assets/81995326-ec36-4bc3-b7dd-606fdaad6cf3)
 
 
 ## Result:
-Thus, the function to perform post order traversal of a binary tree is implemented successfully
+Thus, the C function to insert the elements in the binary search tree is implemented successfully.
